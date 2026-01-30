@@ -1,73 +1,36 @@
-# Welcome to your Lovable project
+# Este projeto foi desenvolvido durante um evento interno de desenvolvimento utilizando plataformas de vibe coding (Lovable).
 
-## Project info
+# O projeto serviu como um experimento para familiarização com a plataforma e com o conceito de vibe code.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+# Este projeto não foi realizado com o intuito de ser utilizado ou propriamente desenvolvido. O projeto foi realizado apenas como uma oportunidade de aprendizado e utiliza dados fictícios.
+# 
 
-## How can I edit this code?
+## Definição do Projeto
 
-There are several ways of editing your application.
+# Ele consiste de uma plataforma que monitora deploys em ambientes como production, staging e development, com integração com a ferramenta de CI Jenkins utilizada para os deploys no cluster.
 
-**Use Lovable**
+# A aplicação cruza informações de deploys no jenkins com aplicações em estados problemáticos (Error, Terminated, Failed, CrashLoopBackOFF, ImagePullBackOFF, etc...) em um cluster kubernetes e 
+# toma uma ação de rollback conforme uma regra definida na aplicação, podendo ser um rollback automático ou que necessita de aprovação. A aplicação também armazena e analisa logs da aplicação 
+# para fornecer insights em qual pode ter sido o problema que estava afetando a aplicação, os logs ficam armazenados para análise futura dos responsáveis.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Funcionalidades
 
-Changes made via Lovable will be committed automatically to this repo.
+## Dashboards e Incidentes
 
-**Use your preferred IDE**
+# A aplicação fornece dashboards simples que apresentam dados como Total de pods no sistema, Pods saudáveis e Pods problemáticos e Rollbacks de hoje. Além de um dashboard de Saúde de Cluster com a porcentagem de Pods saudáveis e Pods problemáticos.
+# A seção de incidentes apresenta um histórico dos rollbacks efetuados e dados sobre a aplicação antes do rollback, como Nome, Ambiente, Status, Logs, Revision e uma análise rápida do sistema.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Usuários e Times
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+# A aplicação conta um sistema de roles para usuários, com permissões específicas e restritas para certos usuários, como criação e edição de regras, aprovação ou reprovação de rollbacks e gerenciamento geral do sistema.
+# Além do controle de permissões por usuário também é possível definir times, se um usuário estiver incluso em um time suas permissões se aplicarão apenas a aplicações, regras, rollbacks e outras funcionalidades do seu respectivo time.
 
-Follow these steps:
+## Regras de Rollback
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# As regras de rollback podem ser definidas a vários níveis de atuação, sendo elas regras de Cluster (Afetam todo o ambiente, disponível apenas para admins e gerentes), Namespace, Grupo ou Aplicação individual.
+# Usuários com as permissões suficientes podem agrupar aplicações em grupos, podendo selecionar apenas aplicações do seu respectivo time, estes grupos podem ser utilizados para aplicar regras de rollback a várias aplicações.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+# As regras consistem de configurações como seleção de escopo (Cluster, Namespace, Grupo, Aplicação), Ambiente para Cluster, Ambiente e Namespace para Namespace, Ambiente e Grupo para Grupo Ambiente, Namespace e Aplicação para Aplicação.
+# Modo de Rollback (Automático ou Requer Aprovação), Tempo de espera até acionar a regra e minímo de pods em estado problemático para acionar a regra.
+# Também é possível definir condições especiais para acionamento da regra como um número de restarts maior ou igual a um certo valor. 
+# Tags podem ser definidas em uma regra para melhor definição.
