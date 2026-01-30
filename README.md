@@ -1,4 +1,4 @@
-### Como e por que o projeto foi desenvolvido.
+# Como e por que o projeto foi desenvolvido.
 
 ## Este projeto foi desenvolvido durante um evento interno de desenvolvimento utilizando plataformas de vibe coding (Lovable).
 
